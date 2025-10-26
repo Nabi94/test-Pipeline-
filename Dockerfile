@@ -1,10 +1,7 @@
-FROM ubuntu:latest
+FROM maven:3.9.2-eclipse-temurin-17
 
-# Repo fayllarını container-ə köçür
-COPY . /app
-
-# İş qovluğu
 WORKDIR /app
 
-# Salam mesajı
-RUN echo "Hello from inside container!"
+COPY . /app
+
+CMD ["mvn", "clean", "test"]
