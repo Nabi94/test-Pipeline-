@@ -5,6 +5,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
+
 
 public class SimpleTest {
     WebDriver driver;
@@ -25,10 +27,14 @@ public class SimpleTest {
 
     @Test
     public void openGoogle() {
-        driver.get("https://www.google.com");
+        openPage("https://www.google.com");
         System.out.println("Title: " + driver.getTitle());
     }
 
+    @Step("Open page {url}")
+    public void openPage(String url) {
+        driver.get(url);
+    }
     @AfterClass
     public void teardown() {
         driver.quit();
