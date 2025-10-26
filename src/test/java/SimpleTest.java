@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +13,14 @@ public class SimpleTest {
     public void setup() {
         // WebDriverManager avtomatik ChromeDriver yükləyir
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+
+        // Headless mode ilə container-də testlərin çalışması
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // GUI olmadan aç
+        options.addArguments("--no-sandbox"); // Docker üçün
+        options.addArguments("--disable-dev-shm-usage"); // shared memory problemi üçün
+
+        driver = new ChromeDriver(options);
     }
 
     @Test
