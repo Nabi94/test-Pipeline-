@@ -3,14 +3,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class SimpleTest {
     WebDriver driver;
 
     @BeforeClass
     public void setup() {
-        // ChromeDriver path container-də olmalı və ya webdriver manager istifadə et
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        // WebDriverManager avtomatik ChromeDriver yükləyir
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
 
