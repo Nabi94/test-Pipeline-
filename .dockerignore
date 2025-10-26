@@ -1,0 +1,12 @@
+cat > .dockerignore << 'EOF'
+target/
+.git/
+.idea/
+*.iml
+.DS_Store
+.mvn/
+mvnw
+mvnw.cmd
+allure-report/
+Dockerfile.report
+EOF
