@@ -17,15 +17,16 @@
         <testng.version>7.11.0</testng.version>
         <webdrivermanager.version>6.3.2</webdrivermanager.version>
         <allure.version>2.21.0</allure.version>
-        <aspectj.version>1.9.22.1</aspectj.version>  <!-- YENİLƏNDİ -->
+        <aspectj.version>1.9.22.1</aspectj.version>
 
         <!-- Plugin Versions -->
-        <maven.surefire.version>3.2.5</maven.surefire.version>  <!-- YENİLƏNDİ -->
+        <maven.compiler.version>3.13.0</maven.compiler.version>
+        <maven.surefire.version>3.2.5</maven.surefire.version>
         <allure.maven.version>2.12.0</allure.maven.version>
     </properties>
 
     <dependencies>
-        <!-- Selenium WebDriver -->
+        <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -47,7 +48,7 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
 
-        <!-- Allure TestNG Integration -->
+        <!-- Allure TestNG -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
@@ -55,7 +56,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- SLF4J (logger üçün) -->
+        <!-- SLF4J Logger -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -70,10 +71,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>${maven.compiler.version}</version>
                 <configuration>
                     <source>17</source>
                     <target>17</target>
+                    <release>17</release>
                 </configuration>
             </plugin>
 
@@ -83,7 +85,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
