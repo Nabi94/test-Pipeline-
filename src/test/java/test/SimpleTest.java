@@ -6,11 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import io.qameta.allure.Attachment;
 
 @Listeners({AllureTestNg.class})
 @Epic("Web Testing")                    // ← ƏLAVƏ
@@ -52,6 +53,18 @@ public class SimpleTest {
 
         // Screenshot əlavə edin (optional)
         Allure.addAttachment("Page URL", "text/plain", url);  // ← ƏLAVƏ
+    }
+    @Attachment(value = "Screenshot", type = "image/png")
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    // Test fail olduqda screenshot çək:
+    @AfterMethod
+    public void afterMethod(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot();
+        }
     }
 
     @AfterClass
