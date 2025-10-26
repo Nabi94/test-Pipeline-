@@ -12,5 +12,6 @@ RUN apt-get update && \
 WORKDIR /app
 COPY . /app
 
-# Run tests in headless mode
-RUN mvn clean test
+# Don't run tests at build time
+# We'll run them when container starts
+CMD ["mvn", "clean", "test"]
